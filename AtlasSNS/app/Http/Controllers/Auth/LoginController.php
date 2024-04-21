@@ -27,7 +27,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home';//伊藤：コメントアウト
+    protected $redirectTo = '/login'; //伊藤：追記
 
     /**
      * Create a new controller instance.
@@ -50,5 +51,21 @@ class LoginController extends Controller
             }
         }
         return view("auth.login");
+    }
+
+    //伊藤：ログインページ表示用
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
+    //伊藤：ログアウト用の記述を追加
+    public function logout(Request $request)
+    {
+        Auth::logout(); // ユーザーをログアウトさせる
+
+        $request->session()->invalidate(); // セッションを無効化する
+
+        return redirect('/login'); // ログアウト後はログインページにリダイレクトする
     }
 }

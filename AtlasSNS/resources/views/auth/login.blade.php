@@ -2,7 +2,8 @@
 
 @section('content')
 <!-- 適切なURLを入力してください -->
-{!! Form::open(['url' => '/〇〇']) !!}
+{!! Form::open(['url' => '/login']) !!}
+<!-- 伊藤：/loginを指定 -->
 
 <p>AtlasSNSへようこそ</p>
 
