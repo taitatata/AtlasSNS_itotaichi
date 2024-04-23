@@ -1,22 +1,143 @@
 @charset "utf-8";
-html{
-}
-body{
-}
-/* header */
-header{
-    background:#186AC9;
+
+html {
+    /* 伊藤：ページの表示幅を1024pxに設定 */
+    max-width: 1024px;
 }
 
+body {}
+
+/* header */
+header {
+    background: #186AC9;
+    /* 伊藤：追記 */
+    height: 60px;
+}
+
+/* 伊藤：追記 */
+#head {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#head h1 {
+    margin-right: auto;
+
+}
+
+.logo {
+    width: 80px;
+    height: 30px;
+    margin-left: 15px;
+}
+
+/* 伊藤：ヘッダーメニューの配置 */
+#header-menu {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-left: auto;
+}
+
+.login-name {
+    color: #fff;
+    margin: 22px 10px;
+}
+
+/* 伊藤：アコーディオンメニュー全体 */
+
+.menu {
+    position: relative;
+}
+
+.menu a {
+    display: block;
+    padding: 22px 0;
+    text-decoration: none;
+    color: #000;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin: 15px 15px 15px 0;
+    padding: 15px;
+    line-height: 1;
+    color: #fff;
+    background: #186AC9;
+    cursor: pointer;
+    position: relative;
+}
+
+input {
+    display: none;
+}
+
+.menu ul {
+    /* 中央揃え */
+    margin: auto;
+    padding: 0;
+    background: #f4f4f4;
+    list-style: none;
+    /* メニューの幅を200pxに指定 */
+    width: 200px;
+    /* メニューをラベルの下に表示 */
+    position: absolute;
+    right: 0;
+}
+
+.menu li {
+    height: 0;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+
+/* メニュー項目の背景色を変更 */
+.menu li:hover {
+    /* カーソルが当たったときの背景色 */
+    background-color: #152a7c;
+}
+
+#menu_bar01:checked~#links01 li {
+    /* 各リンクの高さを調整 */
+    height: 60px;
+}
+
+/* 追加したクラス */
+.menu-trigger:after {
+    content: "";
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-top: #fff 2px solid;
+    border-right: #fff 2px solid;
+    /* 下向き矢印 */
+    transform: rotate(135deg);
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    bottom: 15%;
+    margin-top: -4px;
+}
+
+.menu-trigger.arrow-up:after {
+    /* 上向き矢印 */
+    transform: rotate(-45deg);
+}
+
+
 /* main content */
-#row{
+#row {
     display: flex;
     flex-flow: row wrap;
 }
-#container{
+
+#container {
     flex: 0 0 80%;
 }
-#side-bar{
+
+#side-bar {
     flex: 0 0 19%;
     border-left: 1px solid #727272;
 }
