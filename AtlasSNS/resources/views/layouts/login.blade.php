@@ -25,11 +25,11 @@
             <!-- 伊藤：ロゴのURL貼り付け -->
             <h1><a href="top"><img src="images/Atlas.png" class="logo"></a></h1>
             <div id="header-menu">
+                <!-- 伊藤：ユーザー名を表示_ビューコンポーザーを設定 -->
+                @if(isset($logged_in_user))
+                    <p class="login-name">{{ $logged_in_user->username }}さん</p>
+                @endif
                 <!-- 伊藤：アコーディオンメニューの作成 -->
-                <p class="login-name">〇〇さん</p>
-                <!-- @if(session()->has('username'))
-                <p class="login-name">{{ session('username') }}さん</p>
-                @endif -->
                 <div class="menu">
                     <label for="menu_bar01" class="menu-trigger"></label>
                     <input type="checkbox" id="menu_bar01" />
@@ -38,6 +38,9 @@
                         <li><a href="profile">プロフィール編集</a></li>
                         <li><a href="logout">ログアウト</a></li>
                     </ul>
+                    @auth
+                    <img src="{{ asset('images/' . Auth::user()->images) }}" alt="{{ Auth::user()->name }}" class="img-fluid">
+                    @endauth
                 </div>
             </div>
         </div>
@@ -48,22 +51,32 @@
         </div >
         <div id="side-bar">
             <div id="confirm">
-                <p>〇〇さんの</p>
-                <div>
-                <p>フォロー数</p>
-                <h1>{{ $user->name }}のプロフィール</h1>
-                <p>フォロー数: {{ $followingsCount }}</p>
-                <p>フォロワー数: {{ $followersCount }}</p>
-                <p>〇〇名</p>
+                <!-- 伊藤：ユーザー名を表示_ビューコンポーザーを設定 -->
+                @if(isset($logged_in_user))
+                    <p>{{ $logged_in_user->username }}さんの</p>
+                @endif
+                <div class=follow-count>
+                    <p>フォロー数</p>
+                    <!-- 変数の定義とnullチェック -->
+                    <p>@if(isset($followingsCount))
+                            {{ $followingsCount }}名
+                    @else
+                        未定義
+                    @endif</p>
                 </div>
-                <p class="btn"><a href="../follows/followList">フォローリスト</a></p>
-                <div>
-                <p>フォロワー数</p>
-                <p>〇〇名</p>
+                <p class="btn"><a href="/follow-list">フォローリスト</a></p>
+                <div class="follower-count">
+                    <p>フォロワー数</p>
+                    <!-- 変数の定義とnullチェック -->
+                    <p>@if(isset($followersCount))
+                            {{ $followersCount }}名
+                    @else
+                        未定義
+                    @endif</p>
                 </div>
-                <p class="btn"><a href="../follows/followerList">フォロワーリスト</a></p>
             </div>
-            <p class="btn"><a href="../users/search">ユーザー検索</a></p>
+            <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
+            <p class="btn"><a href="/search">ユーザー検索</a></p>
         </div>
     </div>
     <footer>

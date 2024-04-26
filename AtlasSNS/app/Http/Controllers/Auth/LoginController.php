@@ -61,16 +61,6 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    //フォロー数表示
-    public function show()
-{
-    $user = Auth::user(); // 認証済みユーザーを取得
-    $followingsCount = $user->followings->count(); // フォロー数
-    $followersCount = $user->followers->count(); // フォロワー数
-
-    return view('your.view', compact('user', 'followingsCount', 'followersCount'));
-}
-
 
     //伊藤：ログアウト用の記述を追加
     public function logout(Request $request)

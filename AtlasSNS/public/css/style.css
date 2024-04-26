@@ -2,7 +2,7 @@
 
 html {
     /* 伊藤：ページの表示幅を1024pxに設定 */
-    max-width: 1024px;
+    width: 1024px;
 }
 
 body {}
@@ -38,6 +38,8 @@ header {
     display: flex;
     flex-wrap: nowrap;
     margin-left: auto;
+    align-items: center;
+    margin-right: 20px;
 }
 
 .login-name {
@@ -49,6 +51,9 @@ header {
 
 .menu {
     position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
 }
 
 .menu a {
@@ -76,15 +81,17 @@ input {
 
 .menu ul {
     /* 中央揃え */
-    margin: auto;
+    margin: 0;
     padding: 0;
     background: #f4f4f4;
     list-style: none;
     /* メニューの幅を200pxに指定 */
-    width: 200px;
+    width: 205px;
     /* メニューをラベルの下に表示 */
     position: absolute;
-    right: 0;
+    right: -20px;
+    top: 100%;
+    z-index: 1001;
 }
 
 .menu li {
@@ -134,10 +141,122 @@ input {
 }
 
 #container {
-    flex: 0 0 80%;
+    width: 80%;
 }
 
 #side-bar {
-    flex: 0 0 19%;
+    width: 19.5%;
     border-left: 1px solid #727272;
+}
+
+
+/* トップ画面：投稿フォーム */
+
+/* 投稿フォーム */
+.Submission-form {
+    display: flex;
+    justify-content: flex-start;
+    width: auto;
+    padding: 26px 80px 26px 53px;
+    border-bottom: 6px solid #e0e0e0;
+}
+
+.form-group {
+    display: flex;
+}
+
+/* 投稿テキストエリアのスタイル */
+.textarea-post {
+    flex-grow: 1;
+    min-width: 520px;
+    resize: none;
+    border: none;
+}
+
+.textarea-post::placeholder {
+    /* テキストエリアのプレースホルダーのスタイル設定 */
+    color: #ccc;
+    /* 薄いグレー */
+    opacity: 1;
+    /* プレースホルダーの透明度を完全に不透明に設定 */
+}
+
+
+.user-icon {
+    margin-right: 10px;
+    margin-top: -8px;
+}
+
+/* ユーザーアイコンのスタイル */
+.user-icon,
+.img-fluid {
+    width: 35px;
+    height: 35px;
+}
+
+/* 投稿ボタンのスタイル */
+.submit-button {
+    background: url('../images/post.png') no-repeat center / cover;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+
+/* 投稿一覧画面のスタイル */
+/* 編集ボタンのスタイル */
+.edit-button {
+    background: url('../images/edit.png') no-repeat center / cover;
+    border: none;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+/* 更新ボタンのスタイル */
+.update-button {
+    background: url('../images/edit.png') no-repeat center / cover;
+    border: none;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+/* 削除ボタンのスタイル */
+.delete-button {
+    background: url('../images/trash.png') no-repeat center / cover;
+    border: none;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background: url('../images/trash-h.png') no-repeat center / cover;
+}
+
+/* 投稿編集画面のスタイル */
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1050;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
 }
