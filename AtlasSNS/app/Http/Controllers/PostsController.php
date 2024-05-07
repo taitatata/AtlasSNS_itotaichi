@@ -20,19 +20,23 @@ class PostsController extends Controller
     public function index(){
 
         $user = Auth::user();
-        //自分の投稿とフォローしているユーザーの情報を取得
-        $posts = Post::whereIn('user_id', [$user->id] + $user->followings->pluck('id')->toArray())
-        ->with('user') // ユーザーモデルを事前に読み込む
-        ->orderBy('created_at', 'desc') // 投稿を新しい順に並べ替え
+        //自分のIDとフォローしているユーザーのID情報を取得
+        $user_id = array_merge([$user->id],$user->followings()->pluck('followed_id')->toArray());
+
+        // 自分とフォローしているユーザーの投稿を取得
+        $posts = Post::whereIn('user_id',$user_id)
+        ->with('user')//ユーザーモデルを事前に組み込む
+        ->orderBy('updated_at', 'desc')//投稿を新しい順に並び替え
         ->get();
 
         return view('posts.index', compact('posts'));
     }
 
+    // 投稿の登録処理を実装
     public function store(Request $request)
     {
         $request->validate([
-        'post' => 'required|string', //投稿内容は必須
+        'post' => 'required|max:150', //投稿内容は必須
         ]);
 
         $post = new Post();
@@ -52,12 +56,12 @@ class PostsController extends Controller
     public function update(Request $request, Post $post)
     {
         $post->update(['post' => $request->postContent]);
-        return redirect()->back()->with('success', 'Post updated successfully');
+        return redirect()->back()->with('success', '投稿の更新が完了しました。');
     }
 
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()->back()->with('success', 'Post deleted successfully');
+        return redirect()->back()->with('success', '投稿の削除が完了しました。');
     }
 }

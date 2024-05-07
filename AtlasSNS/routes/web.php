@@ -40,19 +40,28 @@ Route::post('/added', 'Auth\RegisterController@added');
 //アクセス制限機能実装のため追記
 Route::middleware(['auth'])->group(function () {
     Route::get('/top', 'PostsController@index')->name('top');
-    Route::get('/profile', 'UsersController@profile')->name('profile');
-    Route::get('/search', 'UsersController@search')->name('search');
+    Route::get('/profile/{id}', 'UsersController@profile')->name('user.profile');
+    Route::get('/search', 'UsersController@search')->name('user.search');
     Route::get('/follow-list', 'FollowsController@followList')->name('follow-list');
     Route::get('/follower-list', 'FollowsController@followerList')->name('follower-list');
 });
 
-//投稿フォームの設定
+//投稿
 Route::post('/posts', [PostsController::class, 'store'])->name('posts.store');
 
 //投稿一覧の表示
 Route::get('/posts', [PostsController::class, 'index'])->name('posts.index');
 
-//編集フォームの表示
+//編集フォームの表示と更新
 Route::get('/posts/{post}/edit', 'PostsController@edit')->name('posts.edit');
 Route::put('/posts/{post}', 'PostsController@update')->name('posts.update');
+
+//削除機能の実装
 Route::delete('/posts/{post}', 'PostsController@destroy')->name('posts.destroy');
+
+// 検索ページ：フォロー・フォロー解除
+Route::post('/follow/{user}', 'FollowsController@follow')->name('follow');
+Route::delete('/unfollow/{user}', 'FollowsController@unfollow')->name('unfollow');
+
+// ログインユーザーのプロフィール編集
+Route::put('/profile/{id}', 'UsersController@update')->name('user.update');

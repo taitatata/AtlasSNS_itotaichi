@@ -43,7 +43,7 @@ class RegisterController extends Controller
     public function register(Request $request){
         if($request->isMethod('post')){
 
-            //伊藤：バリデーションの定義
+            //バリデーションの定義
             $rules = [
             'username' => 'required|min:2|max:12',
             'mail' => 'required|email|unique:users,mail|min:5|max:40',
@@ -51,7 +51,7 @@ class RegisterController extends Controller
             'password_confirmation' => 'required|alpha_num|min:8|max:20|same:password',
             ];
 
-            //伊藤：エラーメッセージの表示
+            //エラーメッセージの表示
             $messages = [
             'username.required' => 'ユーザー名は必須です。',
             'username.min' => 'ユーザー名は2文字以上で入力してください。',
@@ -72,17 +72,17 @@ class RegisterController extends Controller
             'password_confirmation.same' => 'パスワードとパスワード確認が一致しません。',
             ];
 
-            //伊藤：バリデーションの実行
+            //バリデーションの実行
             $validator = Validator::make($request->all(), $rules,$messages);
 
-            //伊藤：バリデーションエラーがある場合
+            //バリデーションエラーがある場合
             if($validator->fails()){
                 return redirect('register')
                 ->withErrors($validator)
                 ->withInput();
             }
 
-            //伊藤：バリデーション成功時の処理
+            //バリデーション成功時の処理
             $username = $request->input('username');
             $mail = $request->input('mail');
             $password = $request->input('password');
@@ -93,7 +93,7 @@ class RegisterController extends Controller
                 'password' => bcrypt($password),
             ]);
 
-            //伊藤：ユーザー名をセッションに保存
+            //ユーザー名をセッションに保存
             $request->session()->flash('registered_username',$username);
 
             return redirect('added');

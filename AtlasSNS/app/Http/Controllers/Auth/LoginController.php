@@ -27,8 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = '/home';//伊藤：コメントアウト
-    protected $redirectTo = '/login'; //伊藤：追記
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -45,24 +44,21 @@ class LoginController extends Controller
 
             $data=$request->only('mail','password');
             // ログインが成功したら、トップページへ
-            //↓ログイン条件は公開時には消すこと
             if(Auth::attempt($data)){
-                // ユーザー名をセッションに保存
-                // session(['username' => Auth::user()->name]);
                 return redirect('/top');
             }
         }
         return view("auth.login");
     }
 
-    //伊藤：ログインページ表示用
+    //ログインページ表示用
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
 
-    //伊藤：ログアウト用の記述を追加
+    //ログアウト用の記述を追加
     public function logout(Request $request)
     {
         Auth::logout(); // ユーザーをログアウトさせる

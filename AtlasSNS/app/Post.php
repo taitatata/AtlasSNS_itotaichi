@@ -1,6 +1,6 @@
 <?php
 
-namespace App; //Modelsを追記
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 

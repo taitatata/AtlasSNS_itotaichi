@@ -3,8 +3,6 @@
 @section('content')
 
 <div id="clear">
-  <!-- <p>〇〇さん</p> -->
-
   <!-- 伊藤：ユーザー名を表示 -->
   @if (session('registered_username'))
   <p>{{ session('registered_username') }}さん</p>

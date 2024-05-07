@@ -27,7 +27,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    // 伊藤：フォロー・フォロワー数表示用
+    // フォロー・フォロワー数表示用
+    //ユーザーの投稿
+    public function posts()
+    {
+        return $this->hasMany('App\Post', 'user_id', 'id');
+    }
+
     // ユーザーがフォローしている人々
     public function followings() {
         return $this->belongsToMany(User::class, 'follows', 'following_id', 'followed_id');
