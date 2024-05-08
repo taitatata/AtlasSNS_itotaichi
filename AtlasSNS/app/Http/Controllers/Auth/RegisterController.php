@@ -41,6 +41,7 @@ class RegisterController extends Controller
     }
 
     public function register(Request $request){
+        $commonClass = 'register_common';
         if($request->isMethod('post')){
 
             //バリデーションの定義
@@ -48,7 +49,7 @@ class RegisterController extends Controller
             'username' => 'required|min:2|max:12',
             'mail' => 'required|email|unique:users,mail|min:5|max:40',
             'password' => 'required|alpha_num|min:8|max:20',
-            'password_confirmation' => 'required|alpha_num|min:8|max:20|same:password',
+            'passwordConfirmation' => 'required|alpha_num|min:8|max:20|same:password',
             ];
 
             //エラーメッセージの表示
@@ -65,11 +66,11 @@ class RegisterController extends Controller
             'password.alpha_num' => 'パスワードは英数字のみで入力してください。',
             'password.min' => 'パスワードは8文字以上で入力してください。',
             'password.max' => 'パスワードは20文字以上で入力してください。',
-            'password_confirm.required' => 'パスワード確認は必須です。',
-            'password_confirmation.alpha_num' => 'パスワード確認は英数字のみで入力してください。',
-            'password_confirmation.min' => 'パスワード確認は8文字以上で入力してください。',
-            'password_confirmation.max' => 'パスワード確認は20文字以内で入力してください。',
-            'password_confirmation.same' => 'パスワードとパスワード確認が一致しません。',
+            'passwordConfirmation.required' => 'パスワード確認は必須です。',
+            'passwordConfirmation.alpha_num' => 'パスワード確認は英数字のみで入力してください。',
+            'passwordConfirmation.min' => 'パスワード確認は8文字以上で入力してください。',
+            'passwordConfirmation.max' => 'パスワード確認は20文字以内で入力してください。',
+            'passwordConfirmation.same' => 'パスワードとパスワード確認が一致しません。',
             ];
 
             //バリデーションの実行
@@ -79,29 +80,35 @@ class RegisterController extends Controller
             if($validator->fails()){
                 return redirect('register')
                 ->withErrors($validator)
-                ->withInput();
+                ->withInput()
+                ->with('commonClass', $commonClass);
             }
 
             //バリデーション成功時の処理
-            $username = $request->input('username');
-            $mail = $request->input('mail');
-            $password = $request->input('password');
-
             User::create([
-                'username' => $username,
-                'mail' => $mail,
-                'password' => bcrypt($password),
+            'username' => $request->input('username'),
+            'mail' => $request->input('mail'),
+            'password' => bcrypt($request->input('password')),
             ]);
 
             //ユーザー名をセッションに保存
-            $request->session()->flash('registered_username',$username);
-
-            return redirect('added');
+            $request->session()->flash('registered_username', $request->input('username'));
+            $request->session()->put('registration_success', true); // 新規登録成功のフラグをセット
+            return redirect('added')->with('commonClass', 'added-common');
         }
-        return view('auth.register');
+        return view('auth.register',compact('commonClass'));
     }
 
-    public function added(){
-        return view('auth.added');
+    public function added(Request $request)
+    {
+        if (!$request->session()->pull('registration_success', false)) {
+            // registration_success フラグがセットされていない場合
+            return redirect('register');
+        }
+
+        $commonClass = 'added_common'; // 登録完了ページ用のクラス名を安全に設定
+        return view('auth.added', compact('commonClass'));
     }
+
+
 }

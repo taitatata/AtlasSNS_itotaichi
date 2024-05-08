@@ -1,10 +1,240 @@
 @charset "UTF-8";
 
-html{
+html {
     height: 100%;
 }
 
-body{
+body {
     height: 100%;
-    background: #186AC9;
+    /* background: #186AC9; */
+    margin: 0;
+    background-image: linear-gradient(0deg, #fded3f 5%, #0083ff 60%);
+    /* background-image: linear-gradient(to bottom, #0a55f5, #fded3f); */
+    color: white;
+}
+
+header {
+    height: 50%;
+    width: 100%;
+}
+
+.login_menu {
+    /* ログインタイトルの設定 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+}
+
+.login_menu img {
+    /* ロゴの設定 */
+    width: 150px;
+    height: auto;
+    margin: 8px;
+}
+
+.login_title {
+    /* コンテンツテキストの設定 */
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.login_container {
+    /* ログインフォームの設定 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.login_menu_form {
+    margin: -50px 25px 15px 25px;
+    box-sizing: border-box;
+    padding: 25px;
+    background-color: #504f4f4f;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.login_text {
+    /* AtlasSNSへようこそ */
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.login_mail,
+.login_pass {
+    /* 入力欄の設定 */
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    /* 入力欄の調整 */
+    border-radius: 5px;
+    border: none;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    width: 200px;
+    height: 25px;
+}
+
+.login_btn {
+    /* ログインボタンの設定 */
+    display: flex;
+    background-color: red;
+    color: #fff;
+    padding: 7px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-left: auto;
+    margin-bottom: 30px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.login_btn:hover {
+    background: #e11d0b;
+}
+
+.user_registration_link {
+    /* 新規ユーザー登録：新規ユーザーの方はこちら */
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    text-decoration: underline;
+    font-size: 12px;
+}
+
+
+
+/* 新規ユーザー登録画面 */
+.user_registration_container {
+    /* 新規ユーザー登録フォームの設定 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 50vh;
+}
+
+.user_registration {
+    /* フォーム枠の設定 */
+    margin: -180px 25px 15px 25px;
+    box-sizing: border-box;
+    padding: 25px;
+    background-color: #504f4f4f;
+    border-radius: 10px;
+}
+
+.user_registration h2 {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.user_registration_form {
+    /* 入力欄の設定 */
+    display: flex;
+    flex-direction: column;
+}
+
+.submit_btn {
+    /* 新規登録ボタンの設定 */
+    display: flex;
+    background-color: red;
+    color: #fff;
+    padding: 7px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-left: auto;
+    margin-bottom: 30px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.submit_btn:hover {
+    /* 新規登録ボタンの設定（ホバー時） */
+    background: #e11d0b;
+}
+
+.return_login_link {
+    /* ログイン画面へ戻る */
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    text-decoration: underline;
+    font-size: 12px;
+}
+
+
+
+/* 登録完了ページ */
+.added_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.added_box {
+    margin: -50px 25px 15px 25px;
+    box-sizing: border-box;
+    padding: 30px;
+    background-color: #504f4f4f;
+    border-radius: 10px;
+    font-size: 14px;
+    width: 280px;
+}
+
+.added_title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+    font-weight: bold;
+}
+
+.added_text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.return_login_btn {
+    /* ボタン：ログイン画面へ */
+    display: flex;
+    width: 100px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: #fff;
+    padding: 7px 15px;
+    border-radius: 5px;
+    border: none;
+    margin: auto;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.return_login_btn:hover {
+    /* 新規登録ボタンの設定（ホバー時） */
+    background: #e11d0b;
+}
+
+.login_common {
+    height: 80%;
+}
+
+.register_common {
+    height: 50%;
+}
+
+.added_common {
+    height: 80%;
 }

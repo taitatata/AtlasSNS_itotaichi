@@ -40,6 +40,7 @@ class LoginController extends Controller
     }
 
     public function login(Request $request){
+        $commonClass = 'login_common'; //ログインページ用のクラス名
         if($request->isMethod('post')){
 
             $data=$request->only('mail','password');
@@ -47,14 +48,16 @@ class LoginController extends Controller
             if(Auth::attempt($data)){
                 return redirect('/top');
             }
+            return view("auth.login", compact('commonClass'));
         }
-        return view("auth.login");
+        return view("auth.login", compact('commonClass'));
     }
 
     //ログインページ表示用
     public function showLoginForm()
     {
-        return view('auth.login');
+        $commonClass = 'login_common'; //ログインページ用のクラス名
+        return view('auth.login', compact('commonClass'));
     }
 
 

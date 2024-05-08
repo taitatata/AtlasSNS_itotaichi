@@ -28,6 +28,7 @@ Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login')->middl
 Route::post('/login', 'Auth\LoginController@login');
 
 //新規登録
+Route::get('/register', 'Auth\RegisterController@register');
 Route::post('/register', 'Auth\RegisterController@register');
 
 //ログアウト
@@ -35,7 +36,6 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout'); //追記
 
 //ユーザーの新規登録完了ページ
 Route::get('/added', 'Auth\RegisterController@added')->middleware('guest');
-Route::post('/added', 'Auth\RegisterController@added');
 
 //アクセス制限機能実装のため追記
 Route::middleware(['auth'])->group(function () {

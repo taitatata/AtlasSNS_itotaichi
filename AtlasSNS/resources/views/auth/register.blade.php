@@ -5,38 +5,44 @@
 {!! Form::open(['url' => '/register']) !!}
 <!-- 伊藤：/registerを指定 -->
 
-<h2>新規ユーザー登録</h2>
 
-<!-- 伊藤：バリデーションのエラーメッセージを表示 -->
-@if ($errors->any())
-<div class="alert alert-danger">
-  <ul>
-    @foreach($errors->all() as $error)
-    <li>{{ $error }}</li>
-    @endforeach
-  </ul>
+<div class="user_registration_container">
+    <div class="user_registration">
+        <h2>新規ユーザー登録</h2>
+
+        <!-- 伊藤：バリデーションのエラーメッセージを表示 -->
+        @if ($errors->any())
+        <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+        </div>
+        @endif
+            <div class="user_registration_form">
+            {{ Form::label('ユーザー名') }}
+            {{ Form::text('username',null,['class' => 'input']) }}
+        </div>
+            <div class="user_registration_form">
+            {{ Form::label('メールアドレス') }}
+            {{ Form::text('mail',null,['class' => 'input']) }}
+        </div>
+        <div class="user_registration_form">
+            <!-- 伏せ文字にする -->
+            {{ Form::label('パスワード') }}
+            {{ Form::password('password',['class' => 'input']) }}
+        </div>
+        <div class="user_registration_form">
+            <!-- 伏せ文字にする -->
+            {{ Form::label('パスワード確認') }}
+            {{ Form::password('passwordConfirmation',['class' => 'input']) }}
+        </div>
+        {{ Form::submit('新規登録',['class' => 'submit_btn']) }}
+
+        <p><a class="return_login_link" href="/login">ログイン画面へ戻る</a></p>
+    </div>
 </div>
-@endif
-
-{{ Form::label('ユーザー名') }}
-{{ Form::text('username',null,['class' => 'input']) }}
-
-{{ Form::label('メールアドレス') }}
-{{ Form::text('mail',null,['class' => 'input']) }}
-
-<!-- 伊藤：伏せ文字にする -->
-<!-- 'Form::text'から'Form::password'へ変更 -->
-{{ Form::label('パスワード') }}
-{{ Form::password('password',null,['class' => 'input']) }}
-
-<!-- 伊藤：伏せ文字にする -->
-<!-- 'Form::text'から'Form::password'へ変更 -->
-{{ Form::label('パスワード確認') }}
-{{ Form::password('password_confirmation',null,['class' => 'input']) }}
-
-{{ Form::submit('登録') }}
-
-<p><a href="/login">ログイン画面へ戻る</a></p>
 
 {!! Form::close() !!}
 
