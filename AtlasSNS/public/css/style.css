@@ -153,15 +153,14 @@ header {
 }
 
 
+
 /* サイドバーのスタイル */
 #sideBar {
-    flex-grow: 1;
     width: 19.5%;
+    min-height: 100vh;
     border-left: 1.5px solid #727272;
-    box-sizing: border-box;
     font-size: 12px;
 }
-
 
 .follow_count,
 .follower_count {
